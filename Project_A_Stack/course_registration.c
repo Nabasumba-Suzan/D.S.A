@@ -25,7 +25,7 @@ int isFull() {
 /* Push a registration onto the stack */
 void push() {
     if (isFull()) {
-        printf("\nStack is full. Cannot add another registration.\n");
+        printf("\n Stack is full. Cannot add another registration. \n");
         return;
     }
 
@@ -50,11 +50,11 @@ void pop() {
         return;
     }
 
-    printf("\n========== REMOVED ACTION ==========\n");
+    printf("\n  Removed Registration Action:  \n");
     printf("Course Code: %s\n", stack[top].courseCode);
     printf("Course Name: %s\n", stack[top].courseName);
     printf("Action: %s\n", stack[top].action);
-    printf("====================================\n");
+   
 
     top--;
 }
@@ -66,11 +66,11 @@ void peek() {
         return;
     }
 
-    printf("\n========== MOST RECENT ACTION ==========\n");
+    printf("\n  Most Recent Registration Action:  \n"); 
     printf("Course Code: %s\n", stack[top].courseCode);
     printf("Course Name: %s\n", stack[top].courseName);
     printf("Action: %s\n", stack[top].action);
-    printf("========================================\n");
+    
 }
 
 /* Display all registration actions */
@@ -82,13 +82,13 @@ void display() {
         return;
     }
 
-    printf("\n====== REGISTRATION ACTIONS ======\n");
+    
 
     for (i = top; i >= 0; i--) {
         printf("Course Code: %s\n", stack[i].courseCode);
         printf("Course Name: %s\n", stack[i].courseName);
         printf("Action: %s\n", stack[i].action);
-        printf("---------------------------------\n");
+        
     }
 }
 
@@ -96,15 +96,15 @@ int main() {
     int choice;
 
     do {
-        printf("\n==============================================\n");
+        
         printf(" UNIVERSITY COURSE REGISTRATION CONFLICT RESOLVER\n");
-        printf("==============================================\n");
+        
         printf("1. Add Registration Action (Push)\n");
         printf("2. Undo Latest Registration (Pop)\n");
         printf("3. View Latest Registration (Peek)\n");
         printf("4. View All Registration Actions\n");
         printf("5. Exit\n");
-        printf("==============================================\n");
+        
         printf("Enter your choice: ");
 
         scanf("%d", &choice);

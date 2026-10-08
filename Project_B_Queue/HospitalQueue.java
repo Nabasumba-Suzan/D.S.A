@@ -14,10 +14,37 @@ public class HospitalQueue {
         return front == null;
     }
 
+    // Return the number of patients currently in the queue
+    public int size() {
+        int count = 0;
+        Node current = front;
+
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+
+        return count;
+    }
+
     // Add a patient to the rear
     public void enqueue(String patientId, String patientName, String appointmentType) {
+        if (patientId == null || patientId.trim().isEmpty()) {
+            System.out.println("\nPatient ID cannot be empty.");
+            return;
+        }
 
-        Node newNode = new Node(patientId, patientName, appointmentType);
+        if (patientName == null || patientName.trim().isEmpty()) {
+            System.out.println("\nPatient name cannot be empty.");
+            return;
+        }
+
+        if (appointmentType == null || appointmentType.trim().isEmpty()) {
+            System.out.println("\nAppointment type cannot be empty.");
+            return;
+        }
+
+        Node newNode = new Node(patientId.trim(), patientName.trim(), appointmentType.trim());
 
         // If the queue is empty, both front and rear point to the new node
         if (isEmpty()) {
@@ -79,14 +106,18 @@ public class HospitalQueue {
         Node current = front;
 
         System.out.println("\n========== WAITING PATIENTS ==========");
+        System.out.println("Total patients waiting: " + size());
 
+        int count = 1;
         while (current != null) {
+            System.out.println("Position " + count + ":");
             System.out.println("Patient ID: " + current.patientId);
             System.out.println("Name: " + current.patientName);
             System.out.println("Appointment: " + current.appointmentType);
             System.out.println("--------------------------------------");
 
             current = current.next;
+            count++;
         }
     }
 }

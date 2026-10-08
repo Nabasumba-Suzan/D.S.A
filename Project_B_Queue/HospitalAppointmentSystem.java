@@ -2,6 +2,21 @@ import java.util.Scanner;
 
 public class HospitalAppointmentSystem {
 
+    private static String readNonEmptyInput(Scanner scanner, String prompt) {
+        String input;
+
+        while (true) {
+            System.out.print(prompt);
+            input = scanner.nextLine();
+
+            if (input != null && !input.trim().isEmpty()) {
+                return input.trim();
+            }
+
+            System.out.println("\nValue cannot be empty. Please try again.");
+        }
+    }
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -10,31 +25,33 @@ public class HospitalAppointmentSystem {
         int choice;
 
         do {
-            System.out.println("\n========================================");
+            
             System.out.println("     HOSPITAL APPOINTMENT SYSTEM");
-            System.out.println("========================================");
+            
             System.out.println("1. Add Patient (Enqueue)");
             System.out.println("2. Attend Patient (Dequeue)");
             System.out.println("3. View Next Patient (Front)");
             System.out.println("4. Check Waiting List");
             System.out.println("5. Exit");
-            System.out.println("========================================");
+            
             System.out.print("Enter your choice: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid choice. Please enter a number from 1 to 5.");
+                System.out.print("Enter your choice: ");
+                scanner.next();
+            }
 
             choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
-
+            
+                        
                 case 1:
-                    System.out.print("Enter patient ID: ");
-                    String patientId = scanner.nextLine();
-
-                    System.out.print("Enter patient name: ");
-                    String patientName = scanner.nextLine();
-
-                    System.out.print("Enter appointment type: ");
-                    String appointmentType = scanner.nextLine();
+                    String patientId = readNonEmptyInput(scanner, "Enter patient ID: ");
+                    String patientName = readNonEmptyInput(scanner, "Enter patient name: ");
+                    String appointmentType = readNonEmptyInput(scanner, "Enter appointment type: ");
 
                     queue.enqueue(patientId, patientName, appointmentType);
                     break;
@@ -43,11 +60,11 @@ public class HospitalAppointmentSystem {
                     Node patient = queue.dequeue();
 
                     if (patient != null) {
-                        System.out.println("\n========== PATIENT TO ATTEND ==========");
+                        System.out.println("\n  PATIENT TO ATTEND ");
                         System.out.println("Patient ID: " + patient.patientId);
                         System.out.println("Name: " + patient.patientName);
                         System.out.println("Appointment: " + patient.appointmentType);
-                        System.out.println("=======================================");
+                        ;
                     }
                     break;
 
@@ -55,11 +72,11 @@ public class HospitalAppointmentSystem {
                     Node nextPatient = queue.front();
 
                     if (nextPatient != null) {
-                        System.out.println("\n========== NEXT PATIENT ==========");
+                        System.out.println("\n  NEXT PATIENT IN LINE ");
                         System.out.println("Patient ID: " + nextPatient.patientId);
                         System.out.println("Name: " + nextPatient.patientName);
                         System.out.println("Appointment: " + nextPatient.appointmentType);
-                        System.out.println("==================================");
+                        
                     }
                     break;
 
